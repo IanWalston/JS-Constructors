@@ -12,10 +12,14 @@ function Character(title, health, attack, specialattack, counterattack) {
     this.attack = attack
     this.specialattack = specialattack
     this.counterattack = counterattack
-    this.hit = target => {
+    this.hit = (target) => {
         target.health -= this.attack
         this.attack += attack
-        if (this.health <= 0) { this.destroy() }
+        // if (this.health <= 0) { this.destroy() }
+        console.log(this)
+        console.log("hits")
+        console.log(target.title)
+        document.getElementById(`${target.title}info`).innerHTML = `balls`
     }
 }
 
@@ -35,7 +39,7 @@ var playerCharacter = {}
 //an array of character objects that are now enemies for the player character to fight
 var enemyCharacters = {}
 
-//chooser character when you click the image
+//chooser character when you click the image. this also builds html elements for the battle screen.
 var chooseCharacter = (character) => {
     playerCharacter = character
     console.log(`Selected ${playerCharacter.title} as playerCharacter`)
@@ -51,8 +55,10 @@ var chooseCharacter = (character) => {
 
     Object.keys(enemyCharacters).forEach((enemy) => {
         console.log(images[enemy])
-        document.getElementById("enemyDiv").innerHTML += (`<img id=${enemy} src=${images[enemy]}><span  id=${enemy}>HP:${enemyCharacters[enemy].health}</span>`)
-    
+        document.getElementById("enemyDiv").innerHTML += (
+            `<img id=${enemy} src=${images[enemy]} onclick="playerCharacter.hit(enemyCharacters.${enemy})">
+            <div id=${enemy}info>HP:${enemyCharacters[enemy].health}</div>`
+        )
     })
 
     console.log(`Enemies are:`)
