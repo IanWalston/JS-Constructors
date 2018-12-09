@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+    <div id="characterSelectionScreen">
+        <h3>Only one will protect you, the rest will try to kill you</h3>
+        <h4>Choose wisely</h4>
+        <img src="assets/images/bob.png" onclick="chooseCharacter(characters.bob)">
+        <img src="assets/images/box.png" onclick="chooseCharacter(characters.box)">
+        <img src="assets/images/book.png" onclick="chooseCharacter(characters.book)">
+        <img src="assets/images/dogo.png" onclick="chooseCharacter(characters.dogo)">
+    </div>
+
+
+    <div id="battleScreen">
+        <img id="playerCharacter" src="">
+        <hr>
+        <div id="enemyDiv">
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="assets/javascript/game.js"></script>
+</body>
+
+</html>
