@@ -15,36 +15,48 @@ function Character(title, health, attack, specialattack, counterattack, descript
     this.description = description
     this.hit = (target) => {
 
-        //hit mechanic
+        ////HITTING A TARGET
+        //deal damage
         target.health -= this.attack
         document.getElementById("battleLog").innerHTML = `<p>${target.title} took ${this.attack} damage. </p>` + document.getElementById("battleLog").innerHTML
+
+        //gain attack 
         this.attack += (attack / 3)
+
+        //get damaged
         this.health -= target.attack
         document.getElementById("battleLog").innerHTML = `<p>${this.title} took ${target.attack} damage. </p>` + document.getElementById("battleLog").innerHTML
+
+        //if enemy is dead
         if (target.health <= 0) {
             document.getElementById("battleLog").innerHTML = `<p>${target.title} Has been destroyed. </p>` + document.getElementById("battleLog").innerHTML
         }
+
+        //if player is dead
         if (this.health <= 0) {
             document.getElementById("battleLog").innerHTML = `<p>${this.title} Has been destroyed. </p>` + document.getElementById("battleLog").innerHTML
         }
 
+        //update health displays 
         document.getElementById(`${target.title}info`).innerHTML = `HP:${target.health}`
         document.getElementById(`${this.title}info`).innerHTML = `Your HP:${this.health}<br/>
         Your Attack:${this.attack}
         `
 
-        //sound
-        let audioElement = document.createElement("audio")
-        audioElement.setAttribute("src", 'assets/hit.wav')
-        audioElement.play()
-        if (target.health <= 0) {
+        //sound        
+        if (this.health <= 0) {
+            let audioElement = document.createElement("audio")
+            audioElement.setAttribute("src", 'assets/die.wav')
+            audioElement.play()
+        }
+        else if (target.health <= 0) {
             let audioElement = document.createElement("audio")
             audioElement.setAttribute("src", 'assets/kill.wav')
             audioElement.play()
         }
-        if (this.health <= 0) {
+        else {
             let audioElement = document.createElement("audio")
-            audioElement.setAttribute("src", 'assets/die.wav')
+            audioElement.setAttribute("src", 'assets/hit.wav')
             audioElement.play()
         }
     }
@@ -53,6 +65,7 @@ function Character(title, health, attack, specialattack, counterattack, descript
 //an object where each property has a character object for it's value
 var characters = {}
 
+//creating characters        (title, hp, attack, special attack, counter attack, description)
 characters.box = new Character("box", 199, 3, 200, 8, "In awe of this lad's armor.")
 characters.bob = new Character("bob", 100, 9, 200, 11, "i'M rEaDy!")
 characters.tai = new Character("tai", 133, 6, 200, 5, "The More You Learn, The More You Earn.")
@@ -63,8 +76,6 @@ var playerCharacter = {}
 
 //an array of character objects that are now enemies for the player character to fight
 var enemyCharacters = {}
-
-
 
 
 ////CHOOSE CHARACTER SCREEN
@@ -78,12 +89,25 @@ var showDescription = (character) => {
     <br>
     ${character.description}<br/>
     <br>
-    <button type="button" class="btn btn-primary" onclick="chooseCharacter(characters.${character.title})">Choose ${character.title}</button>
-    `
+    <button type="button" class="btn btn-primary" onclick="chooseCharacter(characters.${character.title})">Choose ${character.title}</button>`
+
+    //sounds
+    audioElement = document.createElement("audio")
+    audioElement.setAttribute("src", 'assets/tick.wav')
+    audioElement.play()
 }
+
+////BATTLE SCREEN
 //choose character when you click the button after opening character description. this also erases the select character html and builds html elements for the battle screen.
 var chooseCharacter = (character) => {
     playerCharacter = character
+
+    //sound
+    audioElement = document.createElement("audio")
+            audioElement.setAttribute("src", 'assets/select.wav')
+            audioElement.play()
+
+
     console.log(`Selected ${playerCharacter.title} as playerCharacter`)
     document.getElementById("characterSelectionScreen").innerHTML = ""
     document.getElementById("playerCharacter").src = `${images[playerCharacter.title]}`
@@ -91,9 +115,7 @@ var chooseCharacter = (character) => {
         <p id="${playerCharacter.title}info">
                Your HP:${playerCharacter.health} <br>
                 Your Attack:${playerCharacter.attack}
-           
-        </p>
-        `
+        </p>`
     //puts enemy characters into the enemyChracters object
     Object.keys(characters).forEach((character) => {
         if (!(character == playerCharacter.title)) {
@@ -104,8 +126,11 @@ var chooseCharacter = (character) => {
     Object.keys(enemyCharacters).forEach((enemy) => {
         console.log(images[enemy])
         document.getElementById("enemyDiv").innerHTML += (
-            `<img id=${enemy} src=${images[enemy]} height=10% onclick="playerCharacter.hit(enemyCharacters.${enemy})">
-            <div id=${enemy}info>HP:${enemyCharacters[enemy].health}</div>`
+            `<div class="row">
+                <img width="100%" class="img-fluid" id=${enemy} src=${images[enemy]} onclick="playerCharacter.hit(enemyCharacters.${enemy})">
+                <div id=${enemy}info>HP:${enemyCharacters[enemy].health}</div>
+             </div>
+            `
         )
     })
 }
