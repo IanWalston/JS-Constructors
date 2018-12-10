@@ -16,15 +16,12 @@ function Character(title, health, attack, specialattack, counterattack, descript
     this.hit = (target) => {
 
         //hit mechanic
-        
         target.health -= this.attack
         document.getElementById("battleLog").innerHTML = `<p>${target.title} took ${this.attack} damage. </p>` + document.getElementById("battleLog").innerHTML
         this.attack += (attack / 3)
         this.health -= target.attack
         document.getElementById("battleLog").innerHTML = `<p>${this.title} took ${target.attack} damage. </p>` + document.getElementById("battleLog").innerHTML
-        if (target.health <= 0) {
-            console.log(target)
-            console.log(document.getElementById(target))
+        if (target.health <= 0) {document.getElementById("battleLog").innerHTML = `<p>${target.title} Has been destroyed. </p>` + document.getElementById("battleLog").innerHTML
         }
         document.getElementById(`${target.title}info`).innerHTML = `HP:${target.health}`
         document.getElementById(`${this.title}info`).innerHTML = `Your HP:${this.health}<br/>
