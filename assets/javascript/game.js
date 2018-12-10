@@ -1,3 +1,4 @@
+//making pathways to the image files
 const images = {
     box: "assets/images/box.png",
     bob: "assets/images/bob.png",
@@ -67,7 +68,7 @@ var characters = {}
 
 //creating characters        (title, hp, attack, special attack, counter attack, description)
 characters.box = new Character("box", 199, 3, 200, 8, "In awe of this lad's armor.")
-characters.bob = new Character("bob", 100, 9, 200, 11, "i'M rEaDy!")
+characters.bob = new Character("bob", 100, 9, 200, 11, "i'M rEaDiNg ThE fLaVoUr TeXt!")
 characters.tai = new Character("tai", 133, 6, 200, 5, "The More You Learn, The More You Earn.")
 characters.dogo = new Character("dogo", 90, 12, 200, 14, "Much damage. So impress.")
 

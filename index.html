@@ -7,49 +7,53 @@
 </head>
 
 <body>
-<div class="container">
+    <div class="container">
 
-    <div id="characterSelectionScreen">
-        <h3>Only one will protect you, the rest will try to kill you</h3>
-        <h4>Choose wisely</h4>
-        <p id="characterDescription">Click an image to choose your fighter</p>
-        <div class="row">
-            <div class="col-md-3">
-                <img src="assets/images/bob.png" onclick="showDescription(characters.bob)" class="img-rounded img-fluid" width=100%>
-            </div>
-            <div class="col-md-3">
-                <img src="assets/images/dogo.png" onclick="showDescription(characters.dogo)" class="img-rounded img-fluid" width=100%>
-            </div>
-            <div class="col-md-3">
-                <img src="assets/images/box.png" onclick="showDescription(characters.box)" class="img-rounded img-fluid" width=100%>
-            </div>
-            <div class="col-md-3">
-                <img src="assets/images/tai.png" onclick="showDescription(characters.tai)" class="img-rounded img-fluid" width=100%>
+        <div id="characterSelectionScreen">
+            <h3>Only one will protect you, the rest will try to kill you</h3>
+            <h4>Choose wisely</h4>
+            <p id="characterDescription">Click an image to choose your fighter</p>
+            <div class="row">
+                <div class="col-md-3">
+                    <img src="assets/images/dogo.png" onclick="showDescription(characters.dogo)" class="img-rounded img-fluid"
+                        width=100%>
+                </div>
+                <div class="col-md-3">
+                    <img src="assets/images/box.png" onclick="showDescription(characters.box)" class="img-rounded img-fluid"
+                        width=100%>
+                </div>
+                <div class="col-md-3">
+                    <img src="assets/images/tai.png" onclick="showDescription(characters.tai)" class="img-rounded img-fluid"
+                        width=100%>
+                </div>
+                <div class="col-md-3">
+                    <img src="assets/images/bob.png" onclick="showDescription(characters.bob)" class="img-rounded img-fluid"
+                        width=100%>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div id="battleScreen">
-        <div class="contatiner">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="row">
-                        <div id="playerDiv">
-                            <img width="100%" class="img-fluid" id="playerCharacter" src="">
+        <div id="battleScreen">
+            <div class="contatiner">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="row">
+                            <div id="playerDiv">
+                                <img width="100%" class="img-fluid" id="playerCharacter" src="">
+                            </div>
+                        </div>
+                        <div class="row" id="battleLog">
                         </div>
                     </div>
-                    <div class="row" id="battleLog">
+                    <div class="col-md-4">
                     </div>
-                </div>
-                <div class="col-md-4">
-                </div>
-                <div class="col-md-4">
-                    <div id="enemyDiv">
+                    <div class="col-md-4">
+                        <div id="enemyDiv">
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="assets/javascript/game.js"></script>
