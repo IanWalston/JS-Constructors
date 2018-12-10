@@ -55,14 +55,14 @@ function Character(title, health, attack, specialattack, counterattack, descript
         document.getElementById(`${target.title}info`).innerHTML = ""
         this.enemiesDestroyed++
         if (this.enemiesDestroyed>=3) {
-            setTimeout(win(),10000)
+            setTimeout(()=>win(), 2000)
         }
         }
 
         //if player is dead
         if (this.health <= 0) {
             battleLog(`<p>${this.title} Has been destroyed. </p>`)
-            setTimeout(llose(), 10000)
+            setTimeout(()=>lose(), 2000)
         }
 
         //update health displays 
@@ -94,10 +94,10 @@ function Character(title, health, attack, specialattack, counterattack, descript
 var characters = {}
 
 //creating characters        (title, hp, attack, special attack, counter attack, description)
-characters.tai = new Character("tai", 133, 6, 200, 7, "The More You Learn, The More You Earn.")
-characters.box = new Character("box", 199, 3, 200, 10, "In awe of this lad's armor.")
-characters.dogo = new Character("dogo", 90, 12, 200, 16, "Much damage. So impress.")
-characters.bob = new Character("bob", 100, 9, 200, 13, "i'M rEaDiNg ThE fLaVoUr TeXt!")
+characters.tai = new Character("tai", 133, 6, 200, 9, "The More You Learn, The More You Earn.")
+characters.box = new Character("box", 199, 3, 200, 11, "In awe of this lad's armor.")
+characters.dogo = new Character("dogo", 87, 12, 200, 18, "Much damage. So impress.")
+characters.bob = new Character("bob", 108, 9, 200, 14, "i'M rEaDiNg ThE fLaVoUr TeXt!")
 
 //a character object that the player has chosen
 var playerCharacter = {}
