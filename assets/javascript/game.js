@@ -21,10 +21,9 @@ function Character(title, health, attack, specialattack, counterattack) {
         console.log("hits")
         console.log(target.title)
         document.getElementById(`${target.title}info`).innerHTML = `HP:${target.health}`
-        document.getElementById(`${this.title}info`).innerHTML = `<p>Your HP:${this.health}<p>
-        <p>Your Attack:${this.attack}</p>
+        document.getElementById(`${this.title}info`).innerHTML = `Your HP:${this.health}<br/>
+        Your Attack:${this.attack}
         `
-
     }
 }
 
@@ -49,12 +48,11 @@ var chooseCharacter = (character) => {
     document.getElementById("characterSelectionScreen").innerHTML = ""
     document.getElementById("playerCharacter").src = `${images[playerCharacter.title]}`
     document.getElementById("playerDiv").innerHTML += `
-        <div id="${playerCharacter.title}info">
-            <p>
-                Your HP:${playerCharacter.health}
+        <p id="${playerCharacter.title}info">
+               Your HP:${playerCharacter.health} <br>
                 Your Attack:${playerCharacter.attack}
-            </p>
-        </div>
+           
+        </p>
         `
 
     //puts enemy characters into the enemyChracters object
