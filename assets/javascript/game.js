@@ -66,7 +66,7 @@ var chooseCharacter = (character) => {
     Object.keys(enemyCharacters).forEach((enemy) => {
         console.log(images[enemy])
         document.getElementById("enemyDiv").innerHTML += (
-            `<img id=${enemy} src=${images[enemy]} onclick="playerCharacter.hit(enemyCharacters.${enemy})">
+            `<img id=${enemy} src=${images[enemy]} height=10% onclick="playerCharacter.hit(enemyCharacters.${enemy})">
             <div id=${enemy}info>HP:${enemyCharacters[enemy].health}</div>`
         )
     })
