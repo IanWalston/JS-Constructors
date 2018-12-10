@@ -47,17 +47,17 @@ function Character(title, health, attack, specialattack, counterattack, descript
         //sound        
         if (this.health <= 0) {
             let audioElement = document.createElement("audio")
-            audioElement.setAttribute("src", 'assets/die.wav')
+            audioElement.setAttribute("src", 'assets/sounds/die.wav')
             audioElement.play()
         }
         else if (target.health <= 0) {
             let audioElement = document.createElement("audio")
-            audioElement.setAttribute("src", 'assets/kill.wav')
+            audioElement.setAttribute("src", 'assets/sounds/kill.wav')
             audioElement.play()
         }
         else {
             let audioElement = document.createElement("audio")
-            audioElement.setAttribute("src", 'assets/hit.wav')
+            audioElement.setAttribute("src", 'assets/sounds/hit.wav')
             audioElement.play()
         }
     }
@@ -94,7 +94,7 @@ var showDescription = (character) => {
 
     //sounds
     audioElement = document.createElement("audio")
-    audioElement.setAttribute("src", 'assets/tick.wav')
+    audioElement.setAttribute("src", 'assets/sounds/tick.wav')
     audioElement.play()
 }
 
@@ -105,7 +105,7 @@ var chooseCharacter = (character) => {
 
     //sound
     audioElement = document.createElement("audio")
-    audioElement.setAttribute("src", 'assets/select.wav')
+    audioElement.setAttribute("src", 'assets/sounds/select.wav')
     audioElement.play()
 
     //puts player stats 
