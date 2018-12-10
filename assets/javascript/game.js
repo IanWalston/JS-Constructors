@@ -105,11 +105,10 @@ var chooseCharacter = (character) => {
 
     //sound
     audioElement = document.createElement("audio")
-            audioElement.setAttribute("src", 'assets/select.wav')
-            audioElement.play()
+    audioElement.setAttribute("src", 'assets/select.wav')
+    audioElement.play()
 
-
-    console.log(`Selected ${playerCharacter.title} as playerCharacter`)
+    //puts player stats 
     document.getElementById("characterSelectionScreen").innerHTML = ""
     document.getElementById("playerCharacter").src = `${images[playerCharacter.title]}`
     document.getElementById("playerDiv").innerHTML += `
@@ -117,13 +116,15 @@ var chooseCharacter = (character) => {
                Your HP:${playerCharacter.health} <br>
                 Your Attack:${playerCharacter.attack}
         </p>`
+
     //puts enemy characters into the enemyChracters object
     Object.keys(characters).forEach((character) => {
         if (!(character == playerCharacter.title)) {
             enemyCharacters[character] = characters[character]
         }
     })
-    //puts images of enemies and enemy info into the enemydiv html
+
+    //puts enemies and enemy info into the enemydiv html
     Object.keys(enemyCharacters).forEach((enemy) => {
         console.log(images[enemy])
         document.getElementById("enemyDiv").innerHTML += (
