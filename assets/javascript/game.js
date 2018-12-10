@@ -6,20 +6,18 @@ const images = {
 }
 
 //Character constructor
-function Character(title, health, attack, specialattack, counterattack) {
+function Character(title, health, attack, specialattack, counterattack, description) {
     this.title = title
     this.health = health
     this.attack = attack
     this.specialattack = specialattack
     this.counterattack = counterattack
+    this.description = description
     this.hit = (target) => {
         target.health -= this.attack
         this.attack += (attack/3)
         this.health -= target.attack
         // if (this.health <= 0) { this.destroy() }
-        console.log(this)
-        console.log("hits")
-        console.log(target.title)
         document.getElementById(`${target.title}info`).innerHTML = `HP:${target.health}`
         document.getElementById(`${this.title}info`).innerHTML = `Your HP:${this.health}<br/>
         Your Attack:${this.attack}
@@ -30,16 +28,32 @@ function Character(title, health, attack, specialattack, counterattack) {
 //an object where each property has a character object for it's value
 var characters = {}
 
-characters.box = new Character("box", 199, 3, 20, 5)
-characters.bob = new Character("bob", 100, 9, 20, 11)
-characters.book = new Character("book", 133, 6, 20, 8)
-characters.dogo = new Character("dogo", 90, 12, 20, 14)
+characters.box = new Character("box", 199, 3, 200, 8, "In awe of this lad's armor. Takes less COUNTERATTACK damage")
+characters.bob = new Character("bob", 100, 9, 200, 11, "tHiS gAmE iS eAsY, Has the riskiest TIMED HITS")
+characters.book = new Character("book", 133, 6, 200, 5, "The More You Learn, The More You Earn. I'm a lot more proud of when you win. Gains EXTRA ATTACK upon defeating enemies")
+characters.dogo = new Character("dogo", 90, 12, 200, 14, "Much damage. So impress. Gains EXTRA ATTACK at 50% health")
 
 //a character object that the player has chosen
 var playerCharacter = {}
 
 //an array of character objects that are now enemies for the player character to fight
 var enemyCharacters = {}
+
+
+var showDescription = (character) => {
+    document.getElementById("characterDescription").innerHTML = 
+        `character.title<br/>
+        HP:${character.health}<br/>
+        Attack:${character.attack}<br/>
+        Attack as Enemy:${character.counterattack}<br/>
+        <br>
+        ${character.description}
+
+        
+
+
+        `
+}
 
 //chooser character when you click the image. this also builds html elements for the battle screen.
 var chooseCharacter = (character) => {
