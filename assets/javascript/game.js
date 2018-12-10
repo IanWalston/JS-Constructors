@@ -21,8 +21,13 @@ function Character(title, health, attack, specialattack, counterattack, descript
         this.attack += (attack / 3)
         this.health -= target.attack
         document.getElementById("battleLog").innerHTML = `<p>${this.title} took ${target.attack} damage. </p>` + document.getElementById("battleLog").innerHTML
-        if (target.health <= 0) {document.getElementById("battleLog").innerHTML = `<p>${target.title} Has been destroyed. </p>` + document.getElementById("battleLog").innerHTML
+        if (target.health <= 0) {
+            document.getElementById("battleLog").innerHTML = `<p>${target.title} Has been destroyed. </p>` + document.getElementById("battleLog").innerHTML
         }
+        if (this.health <= 0) {
+            document.getElementById("battleLog").innerHTML = `<p>${this.title} Has been destroyed. </p>` + document.getElementById("battleLog").innerHTML
+        }
+
         document.getElementById(`${target.title}info`).innerHTML = `HP:${target.health}`
         document.getElementById(`${this.title}info`).innerHTML = `Your HP:${this.health}<br/>
         Your Attack:${this.attack}
@@ -32,6 +37,16 @@ function Character(title, health, attack, specialattack, counterattack, descript
         let audioElement = document.createElement("audio")
         audioElement.setAttribute("src", 'assets/hit.wav')
         audioElement.play()
+        if (target.health <= 0) {
+            let audioElement = document.createElement("audio")
+            audioElement.setAttribute("src", 'assets/kill.wav')
+            audioElement.play()
+        }
+        if (this.health <= 0) {
+            let audioElement = document.createElement("audio")
+            audioElement.setAttribute("src", 'assets/die.wav')
+            audioElement.play()
+        }
     }
 }
 
@@ -56,7 +71,7 @@ var enemyCharacters = {}
 //show character description and stats when you click on character image
 var showDescription = (character) => {
     document.getElementById("characterDescription").innerHTML =
-    `character.title<br/>
+        `character.title<br/>
     HP:${character.health}<br/>
     Attack:${character.attack}<br/>
     Attack as Enemy:${character.counterattack}<br/>
