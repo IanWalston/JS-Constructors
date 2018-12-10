@@ -1,19 +1,17 @@
 body{
     font-family:"Lucida Console", Monaco, monospace
 }
-body, html {
-    height: 100%;
-  }
 
-.bg {
-    /* The image used */
-    background-image: "assets/images/background.JPEG";
-  
-    /* Full height */
-    height: 100%;
-  
-    /* Center and scale the image nicely */
+.background{
+    background-image:url("https://wallpapercave.com/wp/smlhon0.jpg");
+    position:absolute;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    height: 100%;
+    width: 100%;
+}
+
+#battleLog, #enemyDiv{
+    color:white
 }
