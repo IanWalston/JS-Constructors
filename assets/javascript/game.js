@@ -3,7 +3,24 @@ const images = {
     box: "assets/images/box.png",
     bob: "assets/images/bob.png",
     tai: "assets/images/tai.png",
-    dogo: "assets/images/dogo.png"
+    dogo: "assets/images/dogo.png",
+}
+
+//function for the battle log
+function battleLog(msg) {
+    document.getElementById("battleLog").innerHTML = msg + document.getElementById("battleLog").innerHTML
+}
+
+//function for dying
+function lose() {
+    document.getElementById("battleScreen").innerHTML = ""
+    document.getElementById("endScreen").innerHTML = "<h1>You have been destroyed</h1>"
+}
+
+//function for winning
+function win() {
+    document.getElementById("battleScreen").innerHTML = ""
+    document.getElementById("endScreen").innerHTML = "<h1>You Win</h1>"
 }
 
 //Character constructor
@@ -14,28 +31,38 @@ function Character(title, health, attack, specialattack, counterattack, descript
     this.specialattack = specialattack
     this.counterattack = counterattack
     this.description = description
+    this.enemiesDestroyed = 0
     this.hit = (target) => {
 
         ////HITTING A TARGET
         //deal damage
         target.health -= this.attack
-        document.getElementById("battleLog").innerHTML = `<p>${target.title} took ${this.attack} damage. </p>` + document.getElementById("battleLog").innerHTML
+        battleLog(`<p>${target.title} took ${this.attack} damage. </p>`)
 
         //gain attack 
         this.attack += (attack / 3)
 
         //get damaged
         this.health -= target.attack
-        document.getElementById("battleLog").innerHTML = `<p>${this.title} took ${target.attack} damage. </p>` + document.getElementById("battleLog").innerHTML
+        battleLog(`<p>${this.title} took ${target.attack} damage. </p>`)
 
         //if enemy is dead
         if (target.health <= 0) {
-            document.getElementById("battleLog").innerHTML = `<p>${target.title} Has been destroyed. </p>` + document.getElementById("battleLog").innerHTML
+        battleLog(`<p>${target.title} Has been destroyed. </p>`)
+        battleLog(target.title)
+        document.getElementById(target.title).onclick = ""
+        document.getElementById(target.title).src = `assets/images/${target.title}dead.png`
+        document.getElementById(`${target.title}info`).innerHTML = ""
+        this.enemiesDestroyed++
+        if (this.enemiesDestroyed>=3) {
+            setTimeout(win(),10000)
+        }
         }
 
         //if player is dead
         if (this.health <= 0) {
-            document.getElementById("battleLog").innerHTML = `<p>${this.title} Has been destroyed. </p>` + document.getElementById("battleLog").innerHTML
+            battleLog(`<p>${this.title} Has been destroyed. </p>`)
+            setTimeout(llose(), 10000)
         }
 
         //update health displays 
@@ -67,10 +94,10 @@ function Character(title, health, attack, specialattack, counterattack, descript
 var characters = {}
 
 //creating characters        (title, hp, attack, special attack, counter attack, description)
-characters.box = new Character("box", 199, 3, 200, 8, "In awe of this lad's armor.")
-characters.bob = new Character("bob", 100, 9, 200, 11, "i'M rEaDiNg ThE fLaVoUr TeXt!")
-characters.tai = new Character("tai", 133, 6, 200, 5, "The More You Learn, The More You Earn.")
-characters.dogo = new Character("dogo", 90, 12, 200, 14, "Much damage. So impress.")
+characters.tai = new Character("tai", 133, 6, 200, 7, "The More You Learn, The More You Earn.")
+characters.box = new Character("box", 199, 3, 200, 10, "In awe of this lad's armor.")
+characters.dogo = new Character("dogo", 90, 12, 200, 16, "Much damage. So impress.")
+characters.bob = new Character("bob", 100, 9, 200, 13, "i'M rEaDiNg ThE fLaVoUr TeXt!")
 
 //a character object that the player has chosen
 var playerCharacter = {}
@@ -83,7 +110,7 @@ var enemyCharacters = {}
 //show character description and stats when you click on character image
 var showDescription = (character) => {
     document.getElementById("characterDescription").innerHTML =
-        `character.title<br/>
+        `${character.title}<br/>
     HP:${character.health}<br/>
     Attack:${character.attack}<br/>
     Attack as Enemy:${character.counterattack}<br/>

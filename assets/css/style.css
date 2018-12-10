@@ -13,5 +13,24 @@ body{
 }
 
 #battleLog, #enemyDiv{
-    color:white
+    width:100%;
+    color:white;
+    background-color:rgba(0, 0, 0, 0.651)
+}
+
+#enemyDiv{
+    width:100%
+}
+
+#characterDescription{
+    margin: 0 auto;
+    background-color:rgba(255, 255, 255, 0.596)
+}
+
+h3, h1{
+    background-color:white
+}
+
+#playerDiv{
+    background:rgba(255, 255, 255, 0.438)
 }
