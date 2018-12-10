@@ -14,28 +14,33 @@ function Character(title, health, attack, specialattack, counterattack, descript
     this.counterattack = counterattack
     this.description = description
     this.hit = (target) => {
-        let audioElement = document.createElement("audio")
-        audioElement.setAttribute("src", 'assets/hit.wav')
-        audioElement.play()
 
+        //hit mechanic
         target.health -= this.attack
         this.attack += (attack / 3)
         this.health -= target.attack
-        // if (this.health <= 0) { this.destroy() }
+        if (target.health <= 0) {
+
+        }
         document.getElementById(`${target.title}info`).innerHTML = `HP:${target.health}`
         document.getElementById(`${this.title}info`).innerHTML = `Your HP:${this.health}<br/>
         Your Attack:${this.attack}
         `
+
+        //sound
+        let audioElement = document.createElement("audio")
+        audioElement.setAttribute("src", 'assets/hit.wav')
+        audioElement.play()
     }
 }
 
 //an object where each property has a character object for it's value
 var characters = {}
 
-characters.box = new Character("box", 199, 3, 200, 8, "In awe of this lad's armor. Takes less COUNTERATTACK damage")
-characters.bob = new Character("bob", 100, 9, 200, 11, "tHiS gAmE iS eAsY, Has the riskiest TIMED HITS")
-characters.book = new Character("book", 133, 6, 200, 5, "The More You Learn, The More You Earn. I'm a lot more proud of when you win. Gains EXTRA ATTACK upon defeating enemies")
-characters.dogo = new Character("dogo", 90, 12, 200, 14, "Much damage. So impress. Gains EXTRA ATTACK at 50% health")
+characters.box = new Character("box", 199, 3, 200, 8, "In awe of this lad's armor.")
+characters.bob = new Character("bob", 100, 9, 200, 11, "i'M rEaDy!")
+characters.book = new Character("book", 133, 6, 200, 5, "The More You Learn, The More You Earn.")
+characters.dogo = new Character("dogo", 90, 12, 200, 14, "Much damage. So impress.")
 
 //a character object that the player has chosen
 var playerCharacter = {}
@@ -44,24 +49,23 @@ var playerCharacter = {}
 var enemyCharacters = {}
 
 
+
+
+////CHOOSE CHARACTER SCREEN
+//show character description and stats when you click on character image
 var showDescription = (character) => {
     document.getElementById("characterDescription").innerHTML =
-        `character.title<br/>
-        HP:${character.health}<br/>
-        Attack:${character.attack}<br/>
-        Attack as Enemy:${character.counterattack}<br/>
-        <br>
-        ${character.description}<br/>
-        <br>
-        <button type="button" class="btn btn-primary" onclick="chooseCharacter(characters.${character.title})">Choose ${character.title}</button>
-        `
- 
-    console.log(character.title)
-    console.log(characters[character.title])
-
+    `character.title<br/>
+    HP:${character.health}<br/>
+    Attack:${character.attack}<br/>
+    Attack as Enemy:${character.counterattack}<br/>
+    <br>
+    ${character.description}<br/>
+    <br>
+    <button type="button" class="btn btn-primary" onclick="chooseCharacter(characters.${character.title})">Choose ${character.title}</button>
+    `
 }
-
-//chooser character when you click the image. this also builds html elements for the battle screen.
+//choose character when you click the button after opening character description. this also erases the select character html and builds html elements for the battle screen.
 var chooseCharacter = (character) => {
     playerCharacter = character
     console.log(`Selected ${playerCharacter.title} as playerCharacter`)
@@ -74,14 +78,12 @@ var chooseCharacter = (character) => {
            
         </p>
         `
-
     //puts enemy characters into the enemyChracters object
     Object.keys(characters).forEach((character) => {
         if (!(character == playerCharacter.title)) {
             enemyCharacters[character] = characters[character]
         }
     })
-
     //puts images of enemies and enemy info into the enemydiv html
     Object.keys(enemyCharacters).forEach((enemy) => {
         console.log(images[enemy])
