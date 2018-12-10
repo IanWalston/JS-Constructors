@@ -15,7 +15,7 @@ function Character(title, health, attack, specialattack, counterattack, descript
     this.description = description
     this.hit = (target) => {
         target.health -= this.attack
-        this.attack += (attack/3)
+        this.attack += (attack / 3)
         this.health -= target.attack
         // if (this.health <= 0) { this.destroy() }
         document.getElementById(`${target.title}info`).innerHTML = `HP:${target.health}`
@@ -41,18 +41,20 @@ var enemyCharacters = {}
 
 
 var showDescription = (character) => {
-    document.getElementById("characterDescription").innerHTML = 
+    document.getElementById("characterDescription").innerHTML =
         `character.title<br/>
         HP:${character.health}<br/>
         Attack:${character.attack}<br/>
         Attack as Enemy:${character.counterattack}<br/>
         <br>
-        ${character.description}
-
-        
-
-
+        ${character.description}<br/>
+        <br>
+        <button type="button" class="btn btn-primary" onclick="chooseCharacter(characters.${character.title})">Choose ${character.title}</button>
         `
+ 
+    console.log(character.title)
+    console.log(characters[character.title])
+
 }
 
 //chooser character when you click the image. this also builds html elements for the battle screen.
