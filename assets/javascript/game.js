@@ -1,7 +1,7 @@
 const images = {
     box: "assets/images/box.png",
     bob: "assets/images/bob.png",
-    book: "assets/images/book.png",
+    tai: "assets/images/tai.png",
     dogo: "assets/images/dogo.png"
 }
 
@@ -16,11 +16,15 @@ function Character(title, health, attack, specialattack, counterattack, descript
     this.hit = (target) => {
 
         //hit mechanic
+        
         target.health -= this.attack
+        document.getElementById("battleLog").innerHTML = `<p>${target.title} took ${this.attack} damage. </p>` + document.getElementById("battleLog").innerHTML
         this.attack += (attack / 3)
         this.health -= target.attack
+        document.getElementById("battleLog").innerHTML = `<p>${this.title} took ${target.attack} damage. </p>` + document.getElementById("battleLog").innerHTML
         if (target.health <= 0) {
-
+            console.log(target)
+            console.log(document.getElementById(target))
         }
         document.getElementById(`${target.title}info`).innerHTML = `HP:${target.health}`
         document.getElementById(`${this.title}info`).innerHTML = `Your HP:${this.health}<br/>
@@ -39,7 +43,7 @@ var characters = {}
 
 characters.box = new Character("box", 199, 3, 200, 8, "In awe of this lad's armor.")
 characters.bob = new Character("bob", 100, 9, 200, 11, "i'M rEaDy!")
-characters.book = new Character("book", 133, 6, 200, 5, "The More You Learn, The More You Earn.")
+characters.tai = new Character("tai", 133, 6, 200, 5, "The More You Learn, The More You Earn.")
 characters.dogo = new Character("dogo", 90, 12, 200, 14, "Much damage. So impress.")
 
 //a character object that the player has chosen
