@@ -2,7 +2,7 @@ const images = {
     box: "assets/images/box.png",
     bob: "assets/images/bob.png",
     book: "assets/images/book.png",
-    dogo: "assets/images/dogo.png",
+    dogo: "assets/images/dogo.png"
 }
 
 //Character constructor
@@ -14,24 +14,27 @@ function Character(title, health, attack, specialattack, counterattack) {
     this.counterattack = counterattack
     this.hit = (target) => {
         target.health -= this.attack
-        this.attack += attack
+        this.attack += (attack/3)
+        this.health -= target.attack
         // if (this.health <= 0) { this.destroy() }
         console.log(this)
         console.log("hits")
         console.log(target.title)
-        document.getElementById(`${target.title}info`).innerHTML = `balls`
+        document.getElementById(`${target.title}info`).innerHTML = `HP:${target.health}`
+        document.getElementById(`${this.title}info`).innerHTML = `<p>Your HP:${this.health}<p>
+        <p>Your Attack:${this.attack}</p>
+        `
+
     }
 }
 
 //an object where each property has a character object for it's value
 var characters = {}
 
-
-
-characters.box = new Character("box", 155, 7, 20, 9)
-characters.bob = new Character("bob", 100, 7, 20, 9)
-characters.book = new Character("book", 115, 7, 20, 9)
-characters.dogo = new Character("dogo", 90, 7, 20, 9)
+characters.box = new Character("box", 199, 3, 20, 5)
+characters.bob = new Character("bob", 100, 9, 20, 11)
+characters.book = new Character("book", 133, 6, 20, 8)
+characters.dogo = new Character("dogo", 90, 12, 20, 14)
 
 //a character object that the player has chosen
 var playerCharacter = {}
@@ -45,6 +48,14 @@ var chooseCharacter = (character) => {
     console.log(`Selected ${playerCharacter.title} as playerCharacter`)
     document.getElementById("characterSelectionScreen").innerHTML = ""
     document.getElementById("playerCharacter").src = `${images[playerCharacter.title]}`
+    document.getElementById("playerDiv").innerHTML += `
+        <div id="${playerCharacter.title}info">
+            <p>
+                Your HP:${playerCharacter.health}
+                Your Attack:${playerCharacter.attack}
+            </p>
+        </div>
+        `
 
     //puts enemy characters into the enemyChracters object
     Object.keys(characters).forEach((character) => {
@@ -53,6 +64,7 @@ var chooseCharacter = (character) => {
         }
     })
 
+    //puts images of enemies and enemy info into the enemydiv html
     Object.keys(enemyCharacters).forEach((enemy) => {
         console.log(images[enemy])
         document.getElementById("enemyDiv").innerHTML += (
@@ -60,15 +72,4 @@ var chooseCharacter = (character) => {
             <div id=${enemy}info>HP:${enemyCharacters[enemy].health}</div>`
         )
     })
-
-    console.log(`Enemies are:`)
-    console.log(enemyCharacters)
-
-    Object.keys(enemyCharacters).forEach((ele) => console.log(ele))
-    Object.keys(enemyCharacters).forEach((ele) => console.log(enemyCharacters[ele]))
-    Object.keys(enemyCharacters).forEach((ele) => console.log(images[ele]))
-
-
 }
-
-
