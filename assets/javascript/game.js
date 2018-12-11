@@ -16,13 +16,13 @@ function battleLog(msg) {
 //function for dying
 function lose() {
     document.getElementById("battleScreen").innerHTML = ""
-    document.getElementById("endScreen").innerHTML = "<h1>You have been destroyed</h1>"
+    document.getElementById("endScreen").innerHTML = `<h1>You have been destroyed</h1><img class="img-fluid" id="playerCharacter" src="assets/images/${playerCharacter.title}dead.png">`
 }
 
 //function for winning
 function win() {
     document.getElementById("battleScreen").innerHTML = ""
-    document.getElementById("endScreen").innerHTML = "<h1>You Win</h1>"
+    document.getElementById("endScreen").innerHTML = `<h1>You Win</h1><br><iframe id="snoop" src="https://giphy.com/embed/ScZzMlETdv9mg" width="480" height="233" frameBorder="0"class="giphy-embed img-float"></iframe><img class="img-fluid" id="playerCharacter" src="assets/images/${playerCharacter.title}.png">`
 }
 
 //Character constructor
@@ -56,6 +56,10 @@ function Character(title, health, attack, specialattack, counterattack, descript
             document.getElementById(`${target.title}info`).innerHTML = ""
             this.enemiesDestroyed++
             if (this.enemiesDestroyed >= 3) {
+                ////win screen music
+                myAudio.loop=false
+                myAudio = new Audio('assets/sounds/win.wav')
+                myAudio.play()
                 setTimeout(() => win(), 2000)
             }
         }
@@ -170,4 +174,5 @@ var chooseCharacter = (character) => {
     })
 
     battleLog("click an enemy to attack it")
+    document.getElementById("enemyCol").style.background = "rgba(0, 0, 0, 0.651)"
 }
