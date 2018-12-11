@@ -6,7 +6,6 @@ body{
     background-image:url("https://external-preview.redd.it/jC1FDg-NEd6HYQoYVaiKw4xmjCS1Qg5Tt9JZj1TkY2o.jpg?auto=webp&s=feb82454c6018449afc9540112360de319126e27");
     position:absolute;
     background-position: center;
-    background-repeat: no-repeat;
     background-size: cover;
     height: 100%;
     width: 100%;
@@ -29,11 +28,13 @@ body{
 
 #characterDescription{
     margin: 0 auto;
-    background-color:rgba(255, 255, 255, 0.596)
+    background-color:rgba(255, 255, 255, 0.596);
+    min-height: 222px
 }
 
 h3, h1{
-    background-color:white
+    background-color:white;
+    padding:2px, 8px
 }
 
 #playerDiv{
