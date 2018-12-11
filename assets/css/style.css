@@ -26,6 +26,10 @@ body{
     width:100%
 }
 
+#characterSelectionScreen{
+    margin:16px
+}
+
 #characterDescription{
     margin: 0 auto;
     background-color:rgba(255, 255, 255, 0.596);
