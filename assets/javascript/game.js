@@ -16,13 +16,13 @@ function battleLog(msg) {
 //function for dying
 function lose() {
     document.getElementById("battleScreen").innerHTML = ""
-    document.getElementById("endScreen").innerHTML = `<h1>You have been destroyed</h1><img class="img-fluid" id="playerCharacter" src="assets/images/${playerCharacter.title}dead.png">`
+    document.getElementById("endScreen").innerHTML = `<h1>You have been destroyed</h1><img class="img-fluid" id="playerCharacter" src="assets/images/${playerCharacter.title}dead.png">  <button type="button" class="btn btn-primary" onclick="location.reload()">reload</button>`
 }
 
 //function for winning
 function win() {
     document.getElementById("battleScreen").innerHTML = ""
-    document.getElementById("endScreen").innerHTML = `<h1>You Win</h1><br><iframe id="snoop" src="https://giphy.com/embed/ScZzMlETdv9mg" width="480" height="233" frameBorder="0"class="giphy-embed img-float"></iframe><img class="img-fluid" id="playerCharacter" src="assets/images/${playerCharacter.title}.png">`
+    document.getElementById("endScreen").innerHTML = `<h1>You Win</h1><br><iframe id="snoop" src="https://giphy.com/embed/ScZzMlETdv9mg" width="480" height="233" frameBorder="0"class="giphy-embed img-float"></iframe><img class="img-fluid" id="playerCharacter" src="assets/images/${playerCharacter.title}.png"><button type="button" class="btn btn-primary" onclick="location.reload()">reload</button>`
 }
 
 //Character constructor
