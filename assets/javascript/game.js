@@ -6,9 +6,11 @@ const images = {
     dogo: "assets/images/dogo.png",
 }
 
+
+
 //function for the battle log
 function battleLog(msg) {
-    document.getElementById("battleLog").innerHTML = msg + document.getElementById("battleLog").innerHTML
+    document.getElementById("battleLog").innerHTML = `<p>${msg}</p>` + document.getElementById("battleLog").innerHTML
 }
 
 //function for dying
@@ -37,32 +39,32 @@ function Character(title, health, attack, specialattack, counterattack, descript
         ////HITTING A TARGET
         //deal damage
         target.health -= this.attack
-        battleLog(`<p>${target.title} took ${this.attack} damage. </p>`)
+        battleLog(`${target.title} took ${this.attack} damage.`)
 
         //gain attack 
         this.attack += (attack / 3)
 
         //get damaged
-        this.health -= target.attack
-        battleLog(`<p>${this.title} took ${target.attack} damage. </p>`)
+        this.health -= target.counterattack
+        battleLog(`${this.title} took ${target.attack} damage.`)
 
         //if enemy is dead
         if (target.health <= 0) {
-        battleLog(`<p>${target.title} Has been destroyed. </p>`)
-        battleLog(target.title)
-        document.getElementById(target.title).onclick = ""
-        document.getElementById(target.title).src = `assets/images/${target.title}dead.png`
-        document.getElementById(`${target.title}info`).innerHTML = ""
-        this.enemiesDestroyed++
-        if (this.enemiesDestroyed>=3) {
-            setTimeout(()=>win(), 2000)
-        }
+            battleLog(`${target.title} Has been destroyed.`)
+            document.getElementById(target.title).onclick = ""
+            document.getElementById(target.title).src = `assets/images/${target.title}dead.png`
+            document.getElementById(`${target.title}info`).innerHTML = ""
+            this.enemiesDestroyed++
+            if (this.enemiesDestroyed >= 3) {
+                setTimeout(() => win(), 2000)
+            }
         }
 
         //if player is dead
         if (this.health <= 0) {
-            battleLog(`<p>${this.title} Has been destroyed. </p>`)
-            setTimeout(()=>lose(), 2000)
+            document.getElementById("playerCharacter").src = `assets/images/${this.title}dead.png`
+            battleLog(`${this.title} Has been destroyed.`)
+            setTimeout(() => lose(), 2000)
         }
 
         //update health displays 
@@ -94,17 +96,16 @@ function Character(title, health, attack, specialattack, counterattack, descript
 var characters = {}
 
 //creating characters        (title, hp, attack, special attack, counter attack, description)
-characters.tai = new Character("tai", 133, 6, 200, 9, "The More You Learn, The More You Earn.")
-characters.box = new Character("box", 199, 3, 200, 11, "In awe of this lad's armor.")
-characters.dogo = new Character("dogo", 87, 12, 200, 18, "Much damage. So impress.")
-characters.bob = new Character("bob", 108, 9, 200, 14, "i'M rEaDiNg ThE fLaVoUr TeXt!")
+characters.tai = new Character("tai", 187, 6, 200, 9, "The More You Learn, The More You Earn.")
+characters.box = new Character("box", 333, 3, 200, 5, "In awe of this lad's armor.")
+characters.dogo = new Character("dogo", 107, 15, 200, 18, "Much damage. So impress.")
+characters.bob = new Character("bob", 143, 9, 200, 13, "i'M rEaDiNg ThE fLaVoUr TeXt!")
 
 //a character object that the player has chosen
 var playerCharacter = {}
 
 //an array of character objects that are now enemies for the player character to fight
 var enemyCharacters = {}
-
 
 ////CHOOSE CHARACTER SCREEN
 //show character description and stats when you click on character image
@@ -130,10 +131,15 @@ var showDescription = (character) => {
 var chooseCharacter = (character) => {
     playerCharacter = character
 
-    //sound
+    //select sound
     audioElement = document.createElement("audio")
     audioElement.setAttribute("src", 'assets/sounds/select.wav')
     audioElement.play()
+
+    //battle loop
+    myAudio = new Audio('assets/sounds/fight.wav');
+    myAudio.loop = true;
+    myAudio.play();
 
     //puts player stats 
     document.getElementById("characterSelectionScreen").innerHTML = ""
@@ -162,4 +168,6 @@ var chooseCharacter = (character) => {
             `
         )
     })
+
+    battleLog("click an enemy to attack it")
 }
