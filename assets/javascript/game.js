@@ -57,7 +57,7 @@ function Character(title, health, attack, specialattack, counterattack, descript
             this.enemiesDestroyed++
             if (this.enemiesDestroyed >= 3) {
                 ////win screen music
-                myAudio.loop=false
+                myAudio.loop = false
                 myAudio = new Audio('assets/sounds/win.wav')
                 myAudio.play()
                 setTimeout(() => win(), 2000)
@@ -114,14 +114,13 @@ var enemyCharacters = {}
 ////CHOOSE CHARACTER SCREEN
 //show character description and stats when you click on character image
 var showDescription = (character) => {
+    document.body.scrollTop = document.documentElement.scrollTop = 0
     document.getElementById("characterDescription").innerHTML =
-        `${character.title}<br/>
-    HP:${character.health}<br/>
+        `<h1>${character.title}</h1>
+    <p>HP:${character.health}<br/>
     Attack:${character.attack}<br/>
-    Attack as Enemy:${character.counterattack}<br/>
-    <br>
-    ${character.description}<br/>
-    <br>
+    Attack as Enemy:${character.counterattack}</p>
+    <p>${character.description}</p>
     <button type="button" class="btn btn-primary" onclick="chooseCharacter(characters.${character.title})">Choose ${character.title}</button>`
 
     //sounds
@@ -166,7 +165,7 @@ var chooseCharacter = (character) => {
         console.log(images[enemy])
         document.getElementById("enemyDiv").innerHTML += (
             `<div class="row">
-                <img width="100%" class="img-fluid" id=${enemy} src=${images[enemy]} onclick="playerCharacter.hit(enemyCharacters.${enemy})">
+            <img width="100%" height="150px" id=${enemy} src=${images[enemy]} onclick="playerCharacter.hit(enemyCharacters.${enemy})">
                 <div id=${enemy}info>HP:${enemyCharacters[enemy].health}</div>
              </div>
             `
